@@ -125,6 +125,8 @@ export async function runPublish({
   const octokit = setupOctokit(githubToken);
   const { packages, tool } = await getPackages(cwd);
 
+  console.log('got packages', packages);
+  
   // To figure out for what package versions we need to create a release, we iterate over all packages
   // and see if there's a corresponding github release for that version. If there is, we skip it.
   // The releases need to be named "@package-name@version"
@@ -142,6 +144,8 @@ export async function runPublish({
       }
     }
   }
+  console.log('packages to release', packagesToRelease);
+  
 
   if (tool !== "root") {
     await Promise.all(
